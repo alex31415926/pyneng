@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import pprint
 """
 Задание 9.3
 
@@ -26,23 +25,16 @@ import pprint
 """
 
 def get_int_vlan_map(config_filename):
-    access_list = {}
-    trunk_list = {}
-    with open(config_filename, 'r') as file:
-        for line in file:
-            #print(line.rstrip())
+    access_dict = {}
+    trunk_dict = {}
+
+    with open(config_filename) as cfg:
+        for line in cfg:
+            line = line.rstrip()
             if line.startswith("interface"):
                 intf = line.split()[1]
-                #print(intf)
-            if line.startswith(" switchport access vlan"):
-                access_list[intf] = int(line.split()[3])
-            if line.startswith(" switchport trunk allowed vlan"):
-                trunk_list[intf] = list(map(int, line.split()[4].split(",")))
-
-    pprint.pprint(access_list, trunk_list)
-    return access_list, trunk_list
-
-
-
-
-get_int_vlan_map("config_sw1.txt")
+            elif "access vlan" in line:
+                access_dict[intf] = int(line.split()[-1])
+            elif "trunk allowed" in line:
+                trunk_dict[intf] = [int(v) for v in line.split()[-1].split(",")]
+        return access_dict, trunk_dict

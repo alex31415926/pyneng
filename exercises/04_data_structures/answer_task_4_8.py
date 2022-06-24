@@ -24,12 +24,12 @@
 Это не значит, что задание сделано правильно, просто на данном этапе сложно иначе
 проверять результат.
 """
-
 ip = "192.168.3.1"
-ip2 = ip.split(".")
 
-str1 = "{:<10}{:<10}{:<10}{:<10}".format(ip2[0], ip2[1], ip2[2], ip2[3])
-str2 = "{:08b}  {:08b}  {:08b}  {:08b}".format(int(ip2[0]), int(ip2[1]), int(ip2[2]), int(ip2[3]))
+octets = ip.split(".")
 
-print(str1)
-print(str2)
+output = """
+{0:<10}{1:<10}{2:<10}{3:<10}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}"""
+
+print(output.format(int(octets[0]), int(octets[1]), int(octets[2]), int(octets[3])))

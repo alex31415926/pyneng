@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import pprint
 """
 Задание 9.4
 
@@ -66,38 +65,17 @@ def ignore_command(command, ignore):
             ignore_status = True
     return ignore_status
 
+
 def convert_config_to_dict(config_filename):
-    result = {}
-    uplevel = None
-    lowlevel = []
-    with open(config_filename) as file:
-        for line in file:
-            if ignore_command(line, ignore):
-                continue
-            elif line.startswith("!"):
-                continue
-            elif line.startswith("\n"):
-                continue
-            #else:
-               #print(line.rstrip())
-            #"""
-            elif not line.startswith(" "):
-                if line == "end\n":
-                    result["end"] = []
-                if uplevel == None:
-                    uplevel = line.rstrip()
+    config_dict = {}
+    with open(config_filename) as f:
+        for line in f:
+            line = line.rstrip()
+            if line and not (line.startswith("!") or ignore_command(line, ignore)):
+                if line[0].isalnum():
+                    section = line
+                    config_dict[section] = []
                 else:
-                    result[uplevel] = lowlevel
-                    lowlevel = []
-                    uplevel = line.rstrip()
-            else:
-                lowlevel.append(line.rstrip().lstrip())
-            #print(line.rstrip())
-        pprint.pprint(result)
-        #"""
-        return(result)
+                    config_dict[section].append(line.strip())
+    return config_dict
 
-
-
-
-convert_config_to_dict("config_sw1.txt")

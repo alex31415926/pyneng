@@ -17,3 +17,23 @@
 """
 
 ignore = ["duplex", "alias", "configuration"]
+
+ignore = ["duplex", "alias", "configuration"]
+
+#filename = ''
+#input(filename)
+n = 0;
+f = open("config_sw1.txt")
+f2 = open("config_sw2.txt", 'w')
+
+string = f.readline()
+for line in f:
+    if line[0] != "!":
+        for ignore_word in ignore:
+            if ignore_word in line:
+                n = n+1
+        if n == 0:
+                #print(line.strip("\n"))
+                f2.write(line)
+        n = 0
+f2.close()

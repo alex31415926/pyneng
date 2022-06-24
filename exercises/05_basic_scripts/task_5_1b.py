@@ -50,3 +50,11 @@ london_co = {
         "routing": True,
     },
 }
+
+import pprint
+
+interface0 = input("Интерфейс?: ")
+x = london_co[interface0].keys()
+x = list(x)
+param = input("Параметр?" + str(x) + " : \n")
+print(london_co[interface0][param])

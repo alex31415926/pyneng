@@ -43,3 +43,12 @@ london_co = {
         "routing": True,
     },
 }
+
+interface0 = input("Интерфейс?: ")
+#interface0 = interface0.lower()
+x = london_co[interface0].keys()
+x = list(x)
+param = input("Параметр?" + str(x) + " : \n")
+param = param.lower()
+value = london_co[interface0].get(param, 'Такого параметра нет')
+print(value)

@@ -17,9 +17,5 @@
 
 mac = "AAAA:BBBB:CCCC"
 
-macHex = mac.split(":")
-a1 = (int(macHex[0], 16))
-a2 = (int(macHex[1], 16))
-a3 = (int(macHex[2], 16))
-
-print('{:b}{:b}{:b}'.format(a1, a2, a3))
+bin_mac = "{:b}".format(int(mac.replace(":", ""), 16))
+print(bin_mac)

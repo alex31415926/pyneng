@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import pprint
 """
 Задание 9.1a
 
@@ -46,20 +45,15 @@ port_security_template = [
 access_config = {"FastEthernet0/12": 10, "FastEthernet0/14": 11, "FastEthernet0/16": 17}
 
 def generate_access_config(intf_vlan_mapping, access_template, psecurity=None):
-    result = []
+    access_config = []
+
     for intf, vlan in intf_vlan_mapping.items():
-        result.append(f"interface {intf}")
+        access_config.append(f"interface {intf}")
         for command in access_template:
             if command.endswith("access vlan"):
-                result.append(f"{command} {vlan}")
+                access_config.append(f"{command} {vlan}")
             else:
-                result.append(command)
+                access_config.append(command)
         if psecurity:
-            result.extend(psecurity)
-    pprint.pprint(result)
-    return result
-
-
-
-
-generate_access_config(access_config, access_mode_template)
+            access_config.extend(psecurity)
+    return access_config
