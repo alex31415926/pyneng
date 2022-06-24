@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pprint
 """
 Задание 9.2a
 
@@ -47,3 +48,16 @@ trunk_config = {
     "FastEthernet0/2": [11, 30],
     "FastEthernet0/4": [17],
 }
+
+def generate_trunk_config(intf_vlan_mapping, trunk_template):
+    result2 = {}
+    for intf, vlans_list in intf_vlan_mapping.items():
+        vlans_list = [str(i) for i in vlans_list]
+        vlans = ",".join(vlans_list)
+        trunk_template2 = trunk_template[:]
+        trunk_template2[-1] = f"{trunk_template2[-1]} {vlans}"
+        result2[intf] = trunk_template2
+#    pprint.pprint(result2)
+    return result2
+
+generate_trunk_config(trunk_config, trunk_mode_template)

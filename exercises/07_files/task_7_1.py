@@ -14,3 +14,23 @@ Outbound Interface    FastEthernet0/0
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+f = open("ospf.txt")
+filedata = f.readlines()
+#print(f.readlines())
+
+text = ["Prefix", "AD/Metric", "Next-Hop", "Last update", "Outbound Interface"]
+for string in filedata:
+    string = string.strip()
+    interface_data = string.split()
+    str1 = "{:<22} {}".format(text[0], interface_data[1])
+    str2 = "{:<22} {}".format(text[1], interface_data[2].strip("[]"))
+    str3 = "{:<22} {}".format(text[2], interface_data[4].strip(","))
+    str4 = "{:<22} {}".format(text[3], interface_data[5].strip(","))
+    str5 = "{:<22} {}".format(text[4], interface_data[6])
+    print(str1)
+    print(str2)
+    print(str3)
+    print(str4)
+    print(str5)
+    #print("\n")

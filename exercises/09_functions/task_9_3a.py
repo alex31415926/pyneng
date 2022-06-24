@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pprint
 """
 Задание 9.3a
 
@@ -25,3 +26,26 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+
+def get_int_vlan_map(config_filename):
+    access_dict = {}
+    trunk_dict = {}
+
+    with open(config_filename) as cfg:
+        for line in cfg:
+            #print(line.rstrip())
+            line = line.rstrip()
+            if line.startswith("interface"):
+                intf = line.split()[1]
+            elif "mode access" in line and len(line.split()) == 3:
+                access_dict[intf] = 1
+            elif "access vlan" in line:
+                #print(len(line.split()))
+                access_dict[intf] = int(line.split()[-1])
+            elif "trunk allowed" in line:
+                trunk_dict[intf] = [int(v) for v in line.split()[-1].split(",")]
+        result = (access_dict, trunk_dict)
+        pprint.pprint(result)
+        return access_dict, trunk_dict
+
+get_int_vlan_map("config_sw2.txt")

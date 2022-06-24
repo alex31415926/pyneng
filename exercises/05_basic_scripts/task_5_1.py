@@ -46,3 +46,6 @@ london_co = {
         "routing": True,
     },
 }
+
+interface0 = input("Интерфейс?: ")
+print(london_co[interface0])

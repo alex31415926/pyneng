@@ -40,3 +40,19 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+import pprint
+
+f = open("CAM_table.txt")
+data = []
+
+for line in f:
+    if "DYNAMIC" in line:
+        ld = line.split()
+        ld[0] = int(ld[0])
+        data.append(ld)
+        #str = "{:<10}{:<20}{:<10}".format(ld[0], ld[1], ld[3])
+data = sorted(data)
+for ld in data:
+    str = "{:<10}{:<20}{:<10}".format(ld[0], ld[1], ld[3])
+    print(str)
+#pprint.pprint(data)
